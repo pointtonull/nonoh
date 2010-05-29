@@ -17,6 +17,7 @@ Nonoh is a cmd tool to do calls using the nonoh.net service. Their sintax is:
 If fromnumber is not give nonoh will user the defaultfrom value from ~/.nonohrc.
 
 ~/.nonorc::
+
     user=usuario
     pass=contraseña
     defaultfrom=3874333333
