@@ -16,6 +16,7 @@ from debug import debug
 @Verbose(3)
 def call(fromphone, tophone):
     b = browser.BROWSER()
+    b.go("http://nonoh.net")
 
     login = b.get_forms("https://www.nonoh.net/myaccount/buycreditpanel.php")[0]
     login["user"] = CONFIG["user"]
@@ -25,15 +26,19 @@ def call(fromphone, tophone):
     if "index.php?part=logoff" in b.get_html():
         debug("Login realizado con exito")
 
-    call = b.get_forms("https://www.nonoh.net/contacts.php")[1]
-    call.set_all_readonly(False)
-    call["Countrycode1"] = "+54"
-    call["anrphonenr"] = fromphone
-    call["Countrycode2"] = "+54"
-    call["bnrphonenr"] = tophone
-    call.submit()
+        call = b.get_forms("https://www.nonoh.net/contacts.php")[1]
+        call.set_all_readonly(False)
+        call["Countrycode1"] = "+54"
+        call["anrphonenr"] = fromphone
+        call["Countrycode2"] = "+54"
+        call["bnrphonenr"] = tophone
+        call.submit()
 
-    return b.get_code == 200
+        return b.get_code == 200
+
+    else:
+        debug("Nonmbre de usuario o contraseña incorrectos")
+        return False
 
 
 def main():
