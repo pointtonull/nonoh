@@ -20,7 +20,7 @@ twill.set_output(StringIO())
 
 TEMPDIR = mkdtemp()
 HOME = os.environ["HOME"]
-CACHE = "/home/deimos/.browser_cache"
+CACHE = HOME +  "/.browser_cache"
 
 URLError = urllib2.URLError
 
