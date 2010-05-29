@@ -1,11 +1,18 @@
 #!/usr/bin/env python
 #-*- coding: UTF-8 -*-
+"""
+    Intentará leer el fichero ~/.nonohrc cuyo contenido debe ser similar a:
+
+    user=usuario
+    pass=contraseña
+    defaultfrom=3874333333
+"""
 import os
 import sys
 import browser
 from decoradores import Verbose
 
-@Verbose(2)
+@Verbose(3)
 def call(fromphone, tophone):
     b = browser.BROWSER()
 
