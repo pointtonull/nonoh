@@ -11,6 +11,7 @@ import os
 import sys
 import browser
 from decoradores import Verbose
+from debug import debug
 
 @Verbose(3)
 def call(fromphone, tophone):
@@ -21,8 +22,10 @@ def call(fromphone, tophone):
     login["pass"] = CONFIG["pass"]
     login.submit()
 
+    if "index.php?part=logoff" in b.get_html():
+        debug("Login realizado con exito")
+
     call = b.get_forms("https://www.nonoh.net/contacts.php")[1]
-    print call
     call.set_all_readonly(False)
     call["Countrycode1"] = "+54"
     call["anrphonenr"] = fromphone
