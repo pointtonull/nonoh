@@ -10,8 +10,15 @@
 import os
 import sys
 import browser
+import csv
+from collections import defaultdict
 from decoradores import Verbose
 from debug import debug
+
+RCDIR = os.path.join(os.environ["HOME"], ".nonoh")
+CONFIGFILE = os.path.join(RCDIR, "config")
+CONTACTSFILE = os.path.join(RCDIR, "contacts")
+LOGFILE = os.path.join(RCDIR, "log")
 
 @Verbose(3)
 def call(fromphone, tophone):
@@ -39,6 +46,8 @@ def call(fromphone, tophone):
         debug("Nonmbre de usuario o contraseña incorrectos.")
         return False
 
+def opennocomments(*args, **kwargs):
+    return (line for line in open(*args, **kwargs) if not line.startswith("#"))
 
 def main():
     if len(sys.argv) == 3:
@@ -46,10 +55,26 @@ def main():
     elif len(sys.argv) == 2:
         return call(CONFIG["defaultfrom"], sys.argv[1])
     else:
-        print """Número de argumentos incorrecto, debe usar:
-        nonoh [origen] destino"""
+        print("""Número de argumentos incorrecto, debe usar:
+        nonoh [origen] destino""")
+
+def readconfig():
+    valids = (
+        "defaultfrom",
+        "defaultcode",
+        "user",
+        "pass",
+    )
+
+    config = dict([(row[0].strip(), row[1].strip())
+        for row in csv.reader(opennocomments(CONFIGFILE), delimiter="=")
+            if row[0].strip() in valids])
+
+    debug(config)
+    return config
+
 
 if __name__ == "__main__":
-    CONFIG = dict([line.strip().split("=")
-        for line in open(os.environ["HOME"] + "/.nonohrc").readlines()])
+    CONFIG = readconfig()
+
     exit(main())

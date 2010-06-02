@@ -176,6 +176,7 @@ class BROWSER:
 
         return self.get_code(), self.get_title()
 
+
 def main():
     print """Este programa está diseñado para ser usado como modulo"""
 
