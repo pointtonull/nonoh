@@ -43,7 +43,7 @@ def call(fromphone, tophone):
         return b.get_code == 200
 
     else:
-        debug("Nonmbre de usuario o contraseña incorrectos.")
+        debug("Nombre de usuario o contraseña incorrectos.")
         return False
 
 def opennocomments(*args, **kwargs):
