@@ -4,12 +4,9 @@ import time
 import sys
 
 INICIO = time.time()
+VERBOSE = 1
 
 def debug(*args):
-    global INICIO
-
-    sys.stderr.writelines("".join(
-        ["%7.2f" % (time.time() - INICIO),
-        " ",
-        " ".join([str(e) for e in args]) + "\n",
-        ]))
+    if VERBOSE:
+        mensaje = " ".join((str(e) for e in args))
+        sys.stderr.write("%7.2f %s\n" % (time.time() - INICIO, mensaje))
