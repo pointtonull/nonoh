@@ -10,14 +10,14 @@ Download
 Use
 ---
 
-Nonoh is a cmd tool to do calls using the nonoh.net service. Their sintax is:
+Nonoh is a cmd tool to make calls using the nonoh.net service. It's sintax is:
 
    nonoh [fromnumber] tonumber
 
-If fromnumber is not give nonoh will user the defaultfrom value from ~/.nonohrc.
+If from number is not given nonoh will asume default values from ~/.nonohrc.
 
 ~/.nonorc::
 
-    user=usuario
-    pass=contraseña
-    defaultfrom=3874333333
+    user=username
+    pass=password
+    defaultfrom=yourtelephonenumberwithareacode
